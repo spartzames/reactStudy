@@ -21,7 +21,7 @@ module.exports = {
                 plugins: ['@babel/plugin-proposal-class-properties'],
             },
         }],
-    },
+    }, // module
 
     output: {
         path: path.join(__dirname, 'dist'),
