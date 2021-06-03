@@ -33,28 +33,27 @@
                                 resultVal: prevState.value,
                             }
                         });
-                        this.input.focus();
+                        this.inputRef.current.focus();
                     } else {
                         this.setState({
                             result: '땡',
                             value: '',
                             resultVal: '',
                         });
+                        this.inputRef.current.focus();
                     }
                 };
 
                 onChange = (e) => this.setState({ value: e.target.value});
 
-                input;
-
-                onRefInput = (c) => { this.input = c; }
+                inputRef = React.createRef();
 
                 render() {
                     return (
                         <React.Fragment>
                             <div>{this.state.first} 곱하기 {this.state.second} = ? </div>
                             <form onSubmit = {this.onSubmit}>
-                                <input ref ={this.onRefInput} type="number" value={this.state.value} onChange={this.onChange} />
+                                <input ref ={this.inputRef} type="number" value={this.state.value} onChange={this.onChange} />
                                 <button tyep="submit">입력</button>
                             </form>
                             <div>{this.state.resultVal} {this.state.result}</div>

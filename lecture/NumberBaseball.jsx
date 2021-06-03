@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Try from './Try';
 
 function getNumbers () { // 숫자 네개를 중복없이 뽑는 함수
@@ -17,6 +17,7 @@ const NumberBaseball = () => {
     const [value, setValue] = useState('');
     const [answer, setAnswer] = useState(getNumbers());
     const [tries, setTries] = useState([]);
+    const inputRef = useRef(null);
 
     const onSubmitForm = (e) => {
             e.preventDefault();
@@ -47,6 +48,7 @@ const NumberBaseball = () => {
                         return [...prevTries, { try: value, result: `${strike} 스트라이크 ${ball} 볼 입니다.`}];
                     });
                     setValue('');
+                    inputRef.current.focus();
                 }
             }
         };
@@ -67,7 +69,7 @@ const NumberBaseball = () => {
         <>
             <h1>{result}</h1>
             <form onSubmit={onSubmitForm}>
-                <input maxLength={4} value={value} onChange={onChangeInput} />
+                <input ref={inputRef} maxLength={4} value={value} onChange={onChangeInput} />
             </form>
             <div>시도: {tries.length}</div>
             <ul>
