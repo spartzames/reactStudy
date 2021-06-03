@@ -23,10 +23,12 @@ class NumberBaseball extends Component {
     onSubmitForm = (e) => {
         e.preventDefault();
         if (this.state.value === this.state.answer.join('')) {
-            this.setState({
-                result: '홈런',
-                tries: [...this.state.tries, {try: this.state.value, result:'홈런!'}], // 옛날 배열 복사해놓고 새로운 배열로 넣어줘야 react에서 서로 다름을 인식
-                // react는 참조가 같으면 바뀐것을 인지하지 못한다. ex) this.state.tries.push(1); 바뀐것을 인지못함
+            this.setState((prevState) => {
+                return {
+                    result: '홈런',
+                    tries: [...prevState.tries, {try: this.state.value, result:'홈런!'}], // 옛날 배열 복사해놓고 새로운 배열로 넣어줘야 react에서 서로 다름을 인식
+                    // react는 참조가 같으면 바뀐것을 인지하지 못한다. ex) this.state.tries.push(1); 바뀐것을 인지못함
+                }
             });
         } else {
             const answerArray = this.state.value.split('').map((v) => parseInt(v));
@@ -50,14 +52,17 @@ class NumberBaseball extends Component {
                         ball += 1;
                     }
                 }
-                this.setState({
-                    tries: [...this.state.tries, { try: this.state.value, result: `${strike} 스트라이크 ${ball} 볼 입니다.`}],
-                })
+                this.setState((prevState) => {
+                    return {
+                        tries: [...prevState.tries, { try: this.state.value, result: `${strike} 스트라이크 ${ball} 볼 입니다.`}],
+                    }
+                });
             }
         }
     };
 
     onChangeInput = (e) => {
+
         this.setState({
             value: e.target.value,
         });
