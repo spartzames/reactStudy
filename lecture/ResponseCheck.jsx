@@ -60,6 +60,28 @@ const ResponseCheck = () => {
             >
                 {message}
             </div>
+            {/* 즉시실행 함수를 만들어서 함수 내부에서 if문 사용*/}
+            {/* {(() => {
+                if (result.length === 0) {
+                    return null;
+                } else {
+                    return (
+                        <>
+                            <div>평균시간 : {result.reduce((a, c) => a + c) / result.length}ms</div>
+                            <button onClick={onReset}>리셋</button>
+                        </>
+                    );
+                }
+            })()} */}
+            {/* 즉시실행 함수를 만들어서 함수 내부에서 for문 사용 */}
+            {/* {(() => {
+                const array = [];
+                for(let i = 0; i < tries.length; i++) {
+                    array.push(<Try key={`${i + 1 }차 시도 : `} tryInfo={v} index={i} />);
+                }
+                return array;
+            })()} */}
+
             {renderAverage()}
         </>
     );
